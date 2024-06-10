@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, VStack, Button, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, VStack, Button, Text, useBreakpointValue } from "@chakra-ui/react";
 import { useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
@@ -13,6 +13,7 @@ const initialTasks = {
 
 const KanbanBoard = () => {
   const [tasks, setTasks] = useState(initialTasks);
+  const columnWidth = useBreakpointValue({ base: "100%", md: "30%" });
 
   const onDragEnd = (result) => {
     const { source, destination } = result;
@@ -48,7 +49,7 @@ const KanbanBoard = () => {
       <Heading mb={4}>Kanban Board</Heading>
       <Button mb={4} onClick={addTask}>Add Task</Button>
       <DragDropContext onDragEnd={onDragEnd}>
-        <Flex justify="space-between">
+        <Flex direction={{ base: "column", md: "row" }} justify="space-between">
           {["todo", "inProgress", "done"].map((column) => (
             <Droppable key={column} droppableId={column}>
               {(provided) => (
@@ -58,8 +59,9 @@ const KanbanBoard = () => {
                   bg="gray.100"
                   p={4}
                   borderRadius="md"
-                  w="30%"
+                  w={columnWidth}
                   minH="400px"
+                  mb={{ base: 4, md: 0 }}
                 >
                   <Heading size="md" mb={4}>
                     {column === "todo" ? "To Do" : column === "inProgress" ? "In Progress" : "Done"}
