@@ -14,6 +14,9 @@ const Navbar = () => {
           <Link as={RouterLink} to="/confetti" color="white" fontSize="xl" fontWeight="bold" ml={4}>
             Confetti
           </Link>
+          <Link as={RouterLink} to="/kanban" color="white" fontSize="xl" fontWeight="bold" ml={4}>
+            Kanban Board
+          </Link>
         </Flex>
       </Flex>
     </Box>
